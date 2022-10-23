@@ -1,5 +1,5 @@
 import { TodoContext } from "./TodoContext";
-import { IProps } from "../interfaces/props/IProps";
+import { IProps } from "../props/IProps";
 
 
 export function ContextProvider({ children }: IProps) {
