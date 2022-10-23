@@ -24,6 +24,7 @@ const TodoForm1 = () => {
     function submitActHandler(ev: FormEvent) {
         ev.preventDefault();
         
+        // Capturar el query en la solicitud enviada y realizar funcionalidad en cada condición
         if (param === "?select_opt=descripcion+manual") {
             taskRef.current.description = description;
             taskRef.current.state = "pendiente"
