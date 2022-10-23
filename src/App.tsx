@@ -8,9 +8,7 @@ import "./App.css";
 import TodoFilter from "./components/TodoFilter";
 import TodoList from "./components/TodoList";
 import { ContextProvider } from "./context/TodoProvider";
-import TodoForm from "./components/TodoForm";
-import React from "react";
-
+import TodoForm1 from "./components/TodoForm1";
 
 function App() {
 
@@ -23,9 +21,8 @@ function App() {
           <Routes>
             <Route path="/" element={<TodoFilter />}>
               <Route path="/tasks-list" element={<TodoList />} />
-              <Route path="/form" element={<TodoForm />} />
             </Route>
-            
+            <Route path="/form" element={<TodoForm1 />} />
           </Routes>
         </BrowserRouter>
       </ContextProvider>
