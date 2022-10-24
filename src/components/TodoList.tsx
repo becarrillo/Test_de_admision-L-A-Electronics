@@ -2,7 +2,7 @@ import { HiPlusSm } from "react-icons/hi";
 import TodoForm from "./TodoForm";
 import db from "../firebase";
 import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
-import { ITodo } from "../interfaces/ITodo";
+import { ITodo } from "../props/ITodo";
 
 
 const TodoList = () => {
