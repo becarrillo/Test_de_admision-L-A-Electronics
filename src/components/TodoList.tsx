@@ -2,6 +2,7 @@ import { HiPlusSm } from "react-icons/hi";
 import TodoForm from "./TodoForm";
 import db from "../firebase";
 import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
+import { ITodo } from "../interfaces/ITodo";
 
 
 const TodoList = () => {
@@ -11,18 +12,19 @@ const TodoList = () => {
         .catch(err => { throw new Error("Found error: ", err) });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    var qActionsDocsDataArr: QueryDocumentSnapshot<DocumentData>[] = [];
+    var qActionsDocsDataArr: ITodo[] = [];
     toBeMapped.then(qDocs => {
         // eslint-disable-next-line array-callback-return
-        
         qDocs.map(data => {
-            return qActionsDocsDataArr.push(data);
+            return qActionsDocsDataArr.push({
+                "id": data.id,
+                "description": data.data()["descripcion"],
+                "state": data.data()["estado"]
+            });
         });
-        console.log(qActionsDocsDataArr.map(t => {return t.id}), "is LIST");
+        console.log(qActionsDocsDataArr.map(t => {return t["description"]}), "is LIST");
     })
         .catch(err => { throw new Error("Nuevo error: ", err) });
-
-    
 
     return (
         <div className="mt-20 py-1">
@@ -47,16 +49,16 @@ const TodoList = () => {
                             <th>Acción</th>
                         </tr>
                     </thead>
-                    <tbody className="text-white">
+                    
+                    <tbody className="text-white hover:bg-zinc-500">
                         <>
                             {
                                 qActionsDocsDataArr.map(task => {
-                                    console.log(task.data(), " is a TASK");
                                     return (
-                                        <tr className="hover:bg-zinc-500" key={task.id}>
-                                            <td>{task.id}</td>
-                                            <td>{task.data()["descripcion"]}</td>
-                                            <td>{task.data()["estado"]}</td>
+                                        <tr key={task["id"]}>
+                                            <td>{task["id"]}</td>
+                                            <td>{task["description"]}</td>
+                                            <td>{task["state"]}</td>
                                         </tr>
                                     )
                                 })
@@ -68,7 +70,5 @@ const TodoList = () => {
         </div>
     )
 }
-
-export default TodoList;
 
 export default TodoList;
